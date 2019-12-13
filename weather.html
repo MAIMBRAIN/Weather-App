@@ -7,94 +7,105 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link href="/your-path-to-fontawesome/css/fontawesome.css" rel="stylesheet">
     <title>5 day Weather</title>
 
 </head>
 
 <body>
-    <header style="height: 54px; background-color: darkslategrey; color: floralwhite; text-align: center; font-size: x-large; padding-top: 8px;">Weather Dashboard</header>
+    <!-- Header -->
+    <header style="height: 54px; background-color: darkslategrey; color: floralwhite; text-align: center; 
+        font-size: x-large; padding-top: 8px;"> Weather Dashboard</header>
 
     <div class="row my-2">
+
+        <!-- Left column -->
         <aside class="col-sm-3 ml-2">
             <p>Search for a City:</p>
             <form class="form-inline">
-                <input class="form-control" type="text" placeholder="Type in a city">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <input class="form-control" id="search" type="text" placeholder="Type in a city">
+                <button class="btn btn-primary">Search</button>
             </form>
-            <div id="recent"></div>
+            <div class="my-2 ml-2" id="recent"></div>
         </aside>
+
+
+        <!-- Today's weather -->
         <div class="col-sm-8 mr-2">
             <div class="card">
                 <div class="card-body">
-                    <h2 class="card-title">This is the card title. City and Date will be here</h2>
-                    <p class="card-text" id="temp">temp</p>
-                    <p class="card-text" id="humidity">humidity</p>
-                    <p class="card-text" id="windSpeed">windSpeed</p>
+                    <h2 class="card-title" id="title">City / Date</h2>
+                    <p class="card-text" id="temp">Temperature</p>
+                    <p class="card-text" id="humidity">Humidity</p>
+                    <p class="card-text" id="windSpeed">Wind Speed</p>
                     <p class="card-text" id="UV">UV</p>
                 </div>
             </div>
+
+            <!-- 5 day forecast -->
             <div class="row my-2">
                 <h2 class="ml-3">5 Day Forecast</h2>
             </div>
-               
+
+            <!-- 5 cards -->
             <div class="row my-2">
                 <div class="col-sm">
-                <div class="card">
-                    <div class="card-body">
-                        <h2 class="card-title">Date</h2>
-                        <img>
-                        <p id="temp">Temperature</p>
-                        <p id="humidity">humidity</p>
+                    <div class="card">
+                        <div class="card-body">
+                            <h2 class="card-title">Date</h2>
+                            <img>
+                            <p id="temp">Temperature</p>
+                            <p id="humidity">humidity</p>
+                        </div>
                     </div>
                 </div>
+                <div class="col-sm">
+                    <div class="card">
+                        <div class="card-body">
+                            <h2 class="card-title">Date</h2>
+                            <img>
+                            <p id="temp">Temperature</p>
+                            <p id="humidity">humidity</p>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-sm">
-                <div class="card">
-                    <div class="card-body">
-                        <h2 class="card-title">Date</h2>
-                        <img>
-                        <p id="temp">Temperature</p>
-                        <p id="humidity">humidity</p>
+                    <div class="card">
+                        <div class="card-body">
+                            <h2 class="card-title">Date</h2>
+                            <img>
+                            <p id="temp">Temperature</p>
+                            <p id="humidity">humidity</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <div class="card">
+                        <div class="card-body">
+                            <h2 class="card-title">Date</h2>
+                            <img>
+                            <p id="temp">Temperature</p>
+                            <p id="humidity">humidity</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <div class="card">
+                        <div class="card-body">
+                            <h2 class="card-title">Date</h2>
+                            <img>
+                            <p id="temp">Temperature</p>
+                            <p id="humidity">humidity</p>
+                        </div>
                     </div>
                 </div>
             </div>
-                <div class="col-sm">
-                <div class="card">
-                    <div class="card-body">
-                        <h2 class="card-title">Date</h2>
-                        <img>
-                        <p id="temp">Temperature</p>
-                        <p id="humidity">humidity</p>
-                    </div>
-                </div>
-            </div>
-                <div class="col-sm">
-                <div class="card">
-                    <div class="card-body">
-                        <h2 class="card-title">Date</h2>
-                        <img>
-                        <p id="temp">Temperature</p>
-                        <p id="humidity">humidity</p>
-                    </div>
-                </div>
-            </div>
-                <div class="col-sm">
-                <div class="card">
-                    <div class="card-body">
-                        <h2 class="card-title">Date</h2>
-                        <img>
-                        <p id="temp">Temperature</p>
-                        <p id="humidity">humidity</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         </div>
     </div>
 
-        <script src="script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+
 </body>
 
 </html>
