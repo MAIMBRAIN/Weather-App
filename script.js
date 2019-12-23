@@ -6,6 +6,7 @@ $(".btn").on("click", function(e)
     // Open weather map API URL
     var apiKey = "503b94b7fc0f576d3f21c4ab45acef8a";
     var weatherURL = "http://api.openweathermap.org/data/2.5/weather?q=" + $("#search").val() + "&APPID=" + apiKey;
+    
 
     // Get Today's weather 'Open weather map' API
     $.ajax({
@@ -28,19 +29,23 @@ $(".btn").on("click", function(e)
 
         // Replace card windSpeed with API wind
         $("#windSpeed").html("Wind Speed: " + response.wind.speed);
+
+        // Get the UV index from 'Open weather map' API
+        // Get lat and lon to use for the UV call
+        var lon = response.coord.lon;
+        var lat = response.coord.lat;
+        var uvURL = "http://api.openweathermap.org/data/2.5/uvi?" + "appid=" + apiKey + "&lat=" + lat + "&lon=" + lon;
+
+        $.ajax({
+            url: uvURL,
+            method: "GET"
+        }).then(function(uvRes)
+        {
+            console.log(uvRes);
+            $("#UV").html("UV Index: " + uvRes.value);
+        })
     });
     
-    // Get the UV index from 'Open weather map' API
-    var uvURL = "http://api.openweathermap.org/data/2.5/uvi?" + "appid=" + apiKey + "&" + $("#search").val();
-
-    $.ajax({
-        url: uvURL,
-        method: "GET"
-    }).then(function(response)
-    {
-        console.log(response);
-    })
-
     // Get the forecast from 'Open weather map' API
     var forecastURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + $("#search").val() + "&APPID=" + apiKey;
 
@@ -50,9 +55,15 @@ $(".btn").on("click", function(e)
     }).then(function(response)
     {
         console.log(response);
+        for(var i = 0; i < 5; i++)
+        {
+            $("<div>").attr({class:"col-sm", id: "card" + i}).appendTo($("#forecast"));
+            $("<div>").attr({class:"card", id:"cardBody" + i}).appendTo($("#card" + i));
+            $("<h2>").attr({class:"card-title", id: "title" + i}).appendTo($("#cardBody" + i));
+            
+        }
     })
 })
-
 
 
 
