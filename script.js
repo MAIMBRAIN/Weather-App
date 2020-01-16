@@ -90,8 +90,18 @@ const forecast = function(search)
     $.ajax({
         url: forecastURL,
         method: "GET"
-    }).then(function (response) {
+    }).then(function (response) 
+    {
         console.log(response);
-    });
-};
+        for(var i = 0; i < 5; i++)
+        {
+            $("<div>").attr({class:"col-sm", id: "card" + i}).appendTo($("#forecast"));
+            $("<div>").attr({class:"card", id:"cardBody" + i}).appendTo($("#card" + i));
+            $("<h2>").attr({class:"card-title", id: "title" + i}).appendTo($("#cardBody" + i));
+            
+        }
+    })
+})
+
+
 
