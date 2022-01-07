@@ -1,5 +1,5 @@
 // When the search button is clicked
-$(".btn").on("click", function(e)
+$(".btn").on("click", function()
 {
     todayWeather();
     forecast();
@@ -8,6 +8,10 @@ $(".btn").on("click", function(e)
 
 // Functions
 // =========================================================================================================================
+$('form').keypress(function(event) { 
+    return event.keyCode != 13;
+}); 
+
 // Convert Date to Day
 function getDay(dateStr, locale)
 {
@@ -35,12 +39,12 @@ const recents = function ()
     // Store that array in local storage
     localStorage.setItem("city", JSON.stringify(cities));
 
+    // Clear recent div to populate new divs below
+    $("#recent").empty();
     // Create a new div block for each recently searched item
     for(let i = 0; i < cities.length; i++)
     {
-        $("<div>").addClass("form-inline form-group row " + [i]).appendTo($("#recents"));
-        $("<button>").html(cities[i]).addClass("form-control col-8")
-
+        $("<button>").attr({class:"btn my-1",id:cities[i], type:"button", value:cities[i]}).text(cities[i]).val(cities[i]).appendTo($("#recent"))
     }
     console.log(cities);
 }
