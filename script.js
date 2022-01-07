@@ -15,8 +15,6 @@ function getDay(dateStr, locale)
     let mm = dateStr.slice(5,7)
     let dd = dateStr.slice(8,10)
     let format = mm+'-'+dd+'-'+yyyy
-
-    console.log(dd)
     var date = new Date(format);
     return date.toLocaleDateString(locale, { weekday: 'long' });        
 }
@@ -52,7 +50,7 @@ const todayWeather = function (search)
 {
     // Open weather map API URL
     search = $("#search").val();
-    var weatherURL = "http://api.openweathermap.org/data/2.5/weather?q=" + search + "&APPID=" + apiKey;
+    var weatherURL = "//api.openweathermap.org/data/2.5/weather?q=" + search + "&APPID=" + apiKey;
 
     // Get Today's weather 'Open weather map' API
     $.ajax({
@@ -72,15 +70,15 @@ const todayWeather = function (search)
         $("#temp").html("Temperature: " + convertKtoF(response.main.temp) + " F");
 
         // Replace card humidity with API humidity
-        $("#humidity").html("Humidity: " + response.main.humidity);
+        $("#humidity").html("Humidity: " + response.main.humidity + "%");
 
         // Replace card windSpeed with API wind
-        $("#windSpeed").html("Wind Speed: " + response.wind.speed);
+        $("#windSpeed").html("Wind Speed: " + response.wind.speed + "mph");
 
         lat = JSON.stringify(response.coord.lat);
         lon = JSON.stringify(response.coord.lon);
 
-        var uvURL = "http://api.openweathermap.org/data/2.5/uvi?appid=" + apiKey + "&lat=" + lat + "&lon=" + lon;
+        var uvURL = "//api.openweathermap.org/data/2.5/uvi?appid=" + apiKey + "&lat=" + lat + "&lon=" + lon;
 
         // Get the UV index from 'Open weather map' API
         $.ajax({
@@ -102,7 +100,7 @@ const forecast = function(search)
 {
     // Get the forecast from 'Open weather map' API
     search = $("#search").val();
-    let forecastURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + search + "&APPID=" + apiKey;
+    let forecastURL = "//api.openweathermap.org/data/2.5/forecast?q=" + search + "&APPID=" + apiKey;
 
     $.ajax({
         url: forecastURL,
@@ -110,19 +108,27 @@ const forecast = function(search)
     }).then(function (response) 
     {
         console.log(response);
+        $('#forecast').empty();
+
         for(let i = 0; i < 5; i++)
         {
-            let temp = response.list[i*8].main.temp
-            let dt = response.list[i*8].dt_txt
+            let resList = response.list[i*8];
+            let dt = resList.dt_txt;
             let dateStr = dt.substring(0,10);
-            let day = getDay(dateStr, "en-US")
-
-
-            $("<div>").attr({class:"col-sm mx-auto", id: "card" + i}).appendTo($("#forecast"));
-            $("<div>").attr({class:"card", id:"cardBody" + i}).appendTo($("#card" + i));
-            $("<h2>").attr({class:"card-title", id: "date" + i}).text(day + dt).appendTo($("#cardBody" + i));
-            $("<p>").attr({id:"temp" + i}).text(convertKtoF(temp) + " F").appendTo($('#date' + i));
+            let day = getDay(dateStr, "en-US");
+            let temp = resList.main.temp;
+            let humidity = resList.main.humidity;
+            let windSpd = resList.wind.speed;
+            let desc = resList.weather[0].description;
             
+            $("<div>").attr({class:"col-sm", id: "card" + i}).appendTo($("#forecast"));
+            $("<div>").attr({class:"card", id:"cardBody" + i}).appendTo($("#card" + i));
+            $("<h2>").attr({class:"card-title", id: "day" + i}).text(day).appendTo($("#cardBody" + i));
+            $("<h4>").attr({id: "date"+ i}).text(dt.substring(0,16)).appendTo($("#cardBody" + i));
+            $("<p>").attr({class:"card-text" , id:"temp" + i}).text("Temperature: "+convertKtoF(temp) + " F").appendTo($('#cardBody' + i));
+            $("<p>").attr({class:"card-text" , id:"humidity" + i}).text("Humidity: "+ humidity + "%").appendTo($('#cardBody' + i));
+            $("<p>").attr({class:"card-text" , id:"windSpd" + i}).text("Wind Speed: "+ windSpd + "MPH").appendTo($('#cardBody' + i));
+            $("<h6>").attr({class:"card-text" , id:"desc" + i}).text(desc).appendTo($('#cardBody' + i));
         }
     })
 }
