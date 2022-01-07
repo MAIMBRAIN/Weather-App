@@ -29,6 +29,7 @@ If I were to finish this project, I would...
  + Add pictures for cloudy, sunny, rainy
  + Convert time from 24hr to 12hr
  + Start page with your location weather data filled out when arriving
+ + Remove the year and only have mm/dd shown on 5-day forecast
 
 
 This project was an assignment in the UCF Full Stack Coding Boot Camp.
