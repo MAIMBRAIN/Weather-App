@@ -11,13 +11,13 @@
 + Bootstrap
 
 # Project Notes
-# Gimme the Goods!
+## Gimme the Goods!
 + It was fairly easy to use jQuery to target the DOM and manipulate it
 + Bootstrap made quick styling for a rough design easy without having to use any CSS
 + AJAX requests to OpenWeatherMap API provided data that was easy to manupulate using JavaScript methods
 + JavaScript can convert dates to Day names
 
-# Leave some Bads :c
+## Leave some Bads :c
  + If I messed up with calling data from the API then I would be blocked for some time from doing so
  + jQuery...
  + + doesn't like allowing generated buttons to have onClick functions
