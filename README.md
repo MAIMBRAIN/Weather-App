@@ -1,6 +1,8 @@
 # Weather App
- Here's your weekly forecast!
- Use the search bar to grab weather data about your city. It will give you the current weather and a 5-day forecast.
+View this app LIVE on my website: averystahl.com/projects/weather_app
+ 
+Here's your weekly forecast!
+Use the search bar to grab weather data about your city. It will give you the current weather and a 5-day forecast.
 
 # Technologies Used
 + HTML
