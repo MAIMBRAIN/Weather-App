@@ -1,8 +1,6 @@
 // When the search button is clicked
 $(".btn").on("click", function(e)
 {
-    event.preventDefault();
-
     todayWeather();
     forecast();
     recents();
@@ -10,6 +8,24 @@ $(".btn").on("click", function(e)
 
 // Functions
 // =========================================================================================================================
+// Convert Date to Day
+function getDay(dateStr, locale)
+{
+    let yyyy = dateStr.slice(0,4)
+    let mm = dateStr.slice(5,7)
+    let dd = dateStr.slice(8,10)
+    let format = mm+'-'+dd+'-'+yyyy
+
+    console.log(dd)
+    var date = new Date(format);
+    return date.toLocaleDateString(locale, { weekday: 'long' });        
+}
+
+// Convert Kelvin to Fahrenheit
+function convertKtoF (temp){
+    return(Math.round(temp * 1.8 - 459.67))
+}
+
 // Save recent search to local storage
 let cities = [];
 var apiKey = "503b94b7fc0f576d3f21c4ab45acef8a";
@@ -24,8 +40,8 @@ const recents = function ()
     // Create a new div block for each recently searched item
     for(let i = 0; i < cities.length; i++)
     {
-        let cityDiv = $("<div>").addClass("form-inline form-group row " + [i]).appendTo($("#recents"));
-        let cityBtn = $("<button>").html(cities[i]).addClass("form-control col-8")
+        $("<div>").addClass("form-inline form-group row " + [i]).appendTo($("#recents"));
+        $("<button>").html(cities[i]).addClass("form-control col-8")
 
     }
     console.log(cities);
@@ -47,12 +63,13 @@ const todayWeather = function (search)
     {
         // API Object in Console
         console.log(response);
+        let date = new Date()
 
         // Replace card title with city name
-        $("#title").html(response.name);
+        $("#title").html(response.name + ' - ' + (date.getMonth()+1) + '/' + date.getDate() + '/' + date.getFullYear());
 
         // Replace card temp with API temperature
-        $("#temp").html("Temperature: " + response.main.temp);
+        $("#temp").html("Temperature: " + convertKtoF(response.main.temp) + " F");
 
         // Replace card humidity with API humidity
         $("#humidity").html("Humidity: " + response.main.humidity);
@@ -85,7 +102,7 @@ const forecast = function(search)
 {
     // Get the forecast from 'Open weather map' API
     search = $("#search").val();
-    var forecastURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + search + "&APPID=" + apiKey;
+    let forecastURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + search + "&APPID=" + apiKey;
 
     $.ajax({
         url: forecastURL,
@@ -93,15 +110,19 @@ const forecast = function(search)
     }).then(function (response) 
     {
         console.log(response);
-        for(var i = 0; i < 5; i++)
+        for(let i = 0; i < 5; i++)
         {
-            $("<div>").attr({class:"col-sm", id: "card" + i}).appendTo($("#forecast"));
+            let temp = response.list[i*8].main.temp
+            let dt = response.list[i*8].dt_txt
+            let dateStr = dt.substring(0,10);
+            let day = getDay(dateStr, "en-US")
+
+
+            $("<div>").attr({class:"col-sm mx-auto", id: "card" + i}).appendTo($("#forecast"));
             $("<div>").attr({class:"card", id:"cardBody" + i}).appendTo($("#card" + i));
-            $("<h2>").attr({class:"card-title", id: "title" + i}).appendTo($("#cardBody" + i));
+            $("<h2>").attr({class:"card-title", id: "date" + i}).text(day + dt).appendTo($("#cardBody" + i));
+            $("<p>").attr({id:"temp" + i}).text(convertKtoF(temp) + " F").appendTo($('#date' + i));
             
         }
     })
-})
-
-
-
+}

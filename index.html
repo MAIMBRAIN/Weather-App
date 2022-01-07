@@ -14,7 +14,7 @@
 <body>
     <!-- Header -->
     <header style="height: 54px; background-color: darkslategrey; color: floralwhite; text-align: center; 
-        font-size: x-large; padding-top: 8px;"> Weather Dashboard</header>
+        font-size: x-large; padding-top: 8px; margin:0; padding:0;"> Weather Dashboard</header>
 
     <div class="row my-2">
 
@@ -24,21 +24,21 @@
             <p>Search for a City:</p>
             <form class="form-inline">
                 <input class="form-control" id="search" type="text" placeholder="Type in a city">
-                <button class="btn btn-primary">Search</button>
+                <button class="btn btn-primary" type="button">Search</button>
             </form>
             <div class="my-2 ml-2" id="recent"></div>
         </aside>
 
         <!-- Recent searches -->
         <div class="row my-2">
-            <aside class="col-sm-3 ml-2">
+            <aside class="col-sm-3">
                 <div id="recent"></div>
             </aside>
         </div>
 
         <!-- Right Column -->
         <!-- Today's weather -->
-        <div class="col-sm-8 mr-2">
+        <div class="col-sm-8">
             <div class="card">
                 <div class="card-body">
                     <h2 class="card-title" id="title">City / Date</h2>
@@ -50,70 +50,16 @@
             </div>
 
             <!-- 5 day forecast -->
-            <div class="row my-2">
-                <h2 class="ml-3">5 Day Forecast</h2>
+            <div class="row my-2 ml-2" >
+                <h2>5 Day Forecast</h2>
             </div>
 
-            <!-- 5 cards -->
             <div class="row my-2" id="forecast">
-                <div class="col-sm">
-                    <div class="card">
-                        <div class="card-body">
-                            <h2 class="card-title" id="date">Date</h2>
-                            <img>
-                            <p id="temp">Temperature</p>
-                            <p id="humidity">humidity</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm">
-                    <div class="card">
-                        <div class="card-body">
-                            <h2 class="card-title" id="date">Date</h2>
-                            <img>
-                            <p id="temp">Temperature</p>
-                            <p id="humidity">humidity</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm">
-                    <div class="card">
-                        <div class="card-body">
-                            <h2 class="card-title" id="date">Date</h2>
-                            <img>
-                            <p id="temp">Temperature</p>
-                            <p id="humidity">humidity</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm">
-                    <div class="card">
-                        <div class="card-body">
-                            <h2 class="card-title" id="date">Date</h2>
-                            <img>
-                            <p id="temp">Temperature</p>
-                            <p id="humidity">humidity</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm">
-                    <div class="card">
-                        <div class="card-body">
-                            <h2 class="card-title" id="date">Date</h2>
-                            <img>
-                            <p id="temp">Temperature</p>
-                            <p id="humidity">humidity</p>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="script.js"></script>
-
 </body>
-
 </html>
